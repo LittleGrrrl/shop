@@ -1,52 +1,62 @@
 export const products = [
   {
-    id: '1',
-    name: 'Керамическая кружка',
-    price: 890,
-    description:
-      'Матовая кружка объёмом 350 мл. Подходит для ежедневного кофе и чая, устойчива к царапинам.',
+    id: 1,
+    name: "Футболка с принтом",
+    price: 2490,
+    discount: 20,
+    category: "Одежда",
+    inStock: true,
+    image: "/images/tshirt.jpg",
+    description: "Хлопковая футболка с авторским принтом. Размеры S–XL.",
   },
   {
-    id: '2',
-    name: 'Льняная сумка',
-    price: 1490,
-    description:
-      'Прочная сумка из натурального льна с широкими ручками. Подойдёт для покупок и повседневных дел.',
+    id: 2,
+    name: "Кроссовки беговые",
+    price: 8990,
+    discount: 0,
+    category: "Обувь",
+    inStock: true,
+    image: "/images/sneakers.jpg",
+    description: "Лёгкие кроссовки для ежедневных пробежек. Амортизация пятки.",
   },
   {
-    id: '3',
-    name: 'Настольная лампа',
-    price: 3290,
-    description:
-      'Лампа с тёплым светом и регулируемой яркостью. Корпус из металла, компактная для рабочего стола.',
-  },
-  {
-    id: '4',
-    name: 'Блокнот A5',
-    price: 490,
-    description:
-      'Твёрдая обложка, 120 страниц безлиновки. Бумага плотная, удобно писать чернилами и карандашом.',
-  },
-  {
-    id: '5',
-    name: 'Шерстяной плед',
+    id: 3,
+    name: "Рюкзак городской",
     price: 4590,
-    description:
-      'Мягкий плед 150×200 см. Держит тепло, не колется, подходит для дивана и вечернего отдыха.',
+    discount: 15,
+    category: "Аксессуары",
+    inStock: true,
+    image: "/images/backpack.jpg",
+    description: 'Рюкзак 20 л с отделением для ноутбука 15". Водоотталкивающая ткань.',
   },
   {
-    id: '6',
-    name: 'Свеча в стекле',
-    price: 790,
-    description:
-      'Соевая свеча с древесным ароматом. Горит около 40 часов, стеклянный стакан можно использовать повторно.',
+    id: 4,
+    name: "Часы наручные",
+    price: 12900,
+    discount: 0,
+    category: "Аксессуары",
+    inStock: false,
+    image: "/images/watch.jpg",
+    description: "Кварцевые часы с минеральным стеклом. Водозащита 5 ATM.",
+  },
+  {
+    id: 5,
+    name: "Куртка демисезонная",
+    price: 7490,
+    discount: 30,
+    category: "Одежда",
+    inStock: true,
+    image: "/images/jacket.jpg",
+    description: "Утеплённая куртка для весны и осени. Ветрозащитная мембрана.",
+  },
+  {
+    id: 6,
+    name: "Шапка вязаная",
+    price: 1290,
+    discount: 0,
+    category: "Аксессуары",
+    inStock: true,
+    image: "/images/beanie.jpg",
+    description: "Шерстяная шапка с отворотом. Универсальный размер.",
   },
 ];
-
-export function getProductById(id) {
-  return products.find((product) => product.id === id);
-}
-
-export function formatPrice(value) {
-  return `${value.toLocaleString('ru-RU')} ₽`;
-}

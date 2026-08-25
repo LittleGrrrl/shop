@@ -1,18 +1,40 @@
-import { Navigate, Route, Routes } from 'react-router-dom';
-import Layout from './components/Layout.jsx';
-import Catalog from './pages/Catalog.jsx';
-import Product from './pages/Product.jsx';
-import Cart from './pages/Cart.jsx';
+import { Routes, Route, Link } from "react-router-dom";
+import { CartProvider, useCart } from "./features/cart/CartContext.jsx";
+import CatalogPage from "./features/catalog/CatalogPage.jsx";
+import ProductPage from "./features/catalog/ProductPage.jsx";
+import CartPage from "./features/cart/CartPage.jsx";
+import styles from "./App.module.css";
 
-export default function App() {
+function Header() {
+  const { items } = useCart();
+  const count = items.reduce((sum, item) => sum + item.quantity, 0);
+
   return (
-    <Routes>
-      <Route element={<Layout />}>
-        <Route path="/" element={<Catalog />} />
-        <Route path="/product/:id" element={<Product />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Route>
-    </Routes>
+    <header className={styles.header}>
+      <Link to="/" className={styles.logo}>
+        HTML Academy Shop
+      </Link>
+      <nav className={styles.nav}>
+        <Link to="/">Каталог</Link>
+        <Link to="/cart">Корзина{count > 0 ? ` (${count})` : ""}</Link>
+      </nav>
+    </header>
   );
 }
+
+function App() {
+  return (
+    <CartProvider>
+      <Header />
+      <main className={styles.main}>
+        <Routes>
+          <Route path="/" element={<CatalogPage />} />
+          <Route path="/product/:id" element={<ProductPage />} />
+          <Route path="/cart" element={<CartPage />} />
+        </Routes>
+      </main>
+    </CartProvider>
+  );
+}
+
+export default App;
