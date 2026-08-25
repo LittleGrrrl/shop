@@ -1,0 +1,37 @@
+.card {
+  max-width: 560px;
+  padding: 28px;
+  background: #fff;
+  border: 1px solid #e6e4df;
+}
+
+.back {
+  display: inline-block;
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.name {
+  margin: 0 0 12px;
+  font-size: 1.75rem;
+  font-weight: 500;
+}
+
+.description {
+  margin: 0 0 20px;
+  line-height: 1.55;
+  color: #444;
+}
+
+.price {
+  margin: 0 0 24px;
+  font-size: 1.15rem;
+}
+
+.button {
+  padding: 10px 16px;
+  color: #fff;
+  background: #1a1a1a;
+  border: 0;
+}

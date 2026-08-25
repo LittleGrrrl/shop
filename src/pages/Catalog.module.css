@@ -1,0 +1,44 @@
+.title {
+  margin: 0 0 28px;
+  font-size: 1.75rem;
+  font-weight: 500;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 180px;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid #e6e4df;
+}
+
+.info {
+  display: block;
+}
+
+.name {
+  margin: 0 0 8px;
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+
+.price {
+  margin: 0 0 20px;
+  color: #555;
+}
+
+.button {
+  align-self: flex-start;
+  padding: 8px 14px;
+  color: #fff;
+  background: #1a1a1a;
+  border: 0;
+}
