@@ -1,7 +1,29 @@
 .title {
-  margin: 0 0 28px;
+  margin: 0 0 20px;
   font-size: 1.75rem;
   font-weight: 500;
+}
+
+.sort {
+  display: flex;
+  gap: 8px;
+  margin: 0 0 20px;
+}
+
+.sortButton,
+.sortActive {
+  padding: 8px 14px;
+  border: 1px solid #1a1a1a;
+}
+
+.sortButton {
+  color: #1a1a1a;
+  background: transparent;
+}
+
+.sortActive {
+  color: #fff;
+  background: #1a1a1a;
 }
 
 .grid {
