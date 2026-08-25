@@ -17,10 +17,17 @@
   font-size: 1.1rem;
   cursor: pointer;
   border-radius: 4px;
+  transition:
+    transform var(--motion-duration-fast) var(--motion-ease-standard),
+    background-color var(--motion-duration-fast) var(--motion-ease-standard);
 }
 
 .button:hover:not(:disabled) {
   background: #f0f0f0;
+}
+
+.button:active:not(:disabled) {
+  transform: scale(0.88);
 }
 
 .button:disabled {
@@ -32,4 +39,17 @@
   min-width: 2ch;
   text-align: center;
   font-variant-numeric: tabular-nums;
+  animation: value-pop var(--motion-duration-normal) var(--motion-ease-emphasized);
+}
+
+@keyframes value-pop {
+  from {
+    opacity: 0;
+    transform: translateY(4px) scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }

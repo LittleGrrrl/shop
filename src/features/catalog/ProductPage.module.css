@@ -9,12 +9,38 @@
   height: 400px;
   background: #f0f0f0;
   border-radius: 8px;
+  animation: image-enter 480ms var(--motion-ease-emphasized) backwards;
 }
 
 .info {
   display: flex;
   flex-direction: column;
   gap: 12px;
+}
+
+.info > * {
+  animation: info-enter var(--motion-duration-slow) var(--motion-ease-emphasized)
+    backwards;
+}
+
+.info > :nth-child(2) {
+  animation-delay: 50ms;
+}
+
+.info > :nth-child(3) {
+  animation-delay: 100ms;
+}
+
+.info > :nth-child(4) {
+  animation-delay: 150ms;
+}
+
+.info > :nth-child(5) {
+  animation-delay: 200ms;
+}
+
+.info > :nth-child(6) {
+  animation-delay: 250ms;
 }
 
 .name {
@@ -50,10 +76,19 @@
   font-size: 16px;
   cursor: pointer;
   align-self: flex-start;
+  transition:
+    transform var(--motion-duration-fast) var(--motion-ease-standard),
+    background-color var(--motion-duration-fast) var(--motion-ease-standard),
+    box-shadow var(--motion-duration-fast) var(--motion-ease-standard);
 }
 
-.button:hover {
+.button:hover:not(:disabled) {
   background: #333;
+  box-shadow: 0 5px 12px rgb(0 0 0 / 16%);
+}
+
+.button:active:not(:disabled) {
+  transform: scale(0.98);
 }
 
 .button:disabled {
@@ -65,8 +100,36 @@
   color: #555;
   text-decoration: none;
   margin-top: 8px;
+  transition:
+    color var(--motion-duration-fast) var(--motion-ease-standard),
+    transform var(--motion-duration-fast) var(--motion-ease-standard);
 }
 
 .back:hover {
   color: #111;
+  transform: translateX(-3px);
+}
+
+@keyframes image-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes info-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

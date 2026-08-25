@@ -21,7 +21,7 @@ export function QuantitySelector({ max = 10, onChange }) {
       >
         −
       </button>
-      <span className={styles.value} aria-live="polite">
+      <span key={quantity} className={styles.value} aria-live="polite">
         {quantity}
       </span>
       <button

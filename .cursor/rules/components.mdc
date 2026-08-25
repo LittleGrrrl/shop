@@ -4,23 +4,7 @@ globs: ["src/components/**/*.jsx", "src/features/**/*.jsx"]
 alwaysApply: false
 ---
 
-# Соглашения по React-компонентам
-
-- Только функциональные компоненты.
-- Пропсы принимать через деструктуризацию в сигнатуре.
-- Один компонент в одном файле; имя файла совпадает с именем компонента (`ProductCard.jsx` → `ProductCard`).
-- Стили — через CSS-модули рядом с компонентом (`Component.module.css`), классы через `styles`.
-
-```jsx
-import styles from './ProductCard.module.css';
-
-export default function ProductCard({ name, price, onAdd }) {
-  return (
-    <article className={styles.card}>
-      <h2 className={styles.title}>{name}</h2>
-      <p className={styles.price}>{price}</p>
-      <button type="button" onClick={onAdd}>В корзину</button>
-    </article>
-  );
-}
-```
+- Используй функциональные компоненты.
+- Деструктурируй пропсы в аргументах компонента.
+- Размещай один компонент в одном файле.
+- Подключай стили через CSS-модули (`*.module.css`).
