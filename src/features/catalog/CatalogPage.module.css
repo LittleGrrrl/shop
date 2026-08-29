@@ -18,8 +18,35 @@
   cursor: pointer;
 }
 
+.resultCount {
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 20px;
+}
+
+.emptyState {
+  padding: 40px 20px;
+  border: 1px dashed #c8c8c8;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.resetButton {
+  padding: 10px 16px;
+  margin-top: 16px;
+  border: 0;
+  border-radius: 6px;
+  background: #111;
+  color: #fff;
+  font: inherit;
+  cursor: pointer;
+}
+
+.resetButton:hover {
+  background: #333;
 }
