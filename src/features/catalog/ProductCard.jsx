@@ -15,7 +15,10 @@ function ProductCard({ product }) {
       </h2>
       <p className={styles.price}>
         {product.discount > 0 && (
-          <span className={styles.oldPrice}>{formatPrice(product.price)}</span>
+          <>
+            <span className={styles.oldPrice}>{formatPrice(product.price)}</span>
+            <span className={styles.discountBadge}>-{product.discount}%</span>
+          </>
         )}
         {formatPrice(finalPrice)}
       </p>

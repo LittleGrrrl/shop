@@ -12,27 +12,34 @@ export function QuantitySelector({ max = 10, onChange }) {
 
   return (
     <div className={styles.selector}>
-      <button
-        type="button"
-        className={styles.button}
-        onClick={() => update(quantity - 1)}
-        disabled={quantity <= 1}
-        aria-label="Уменьшить количество"
-      >
-        −
-      </button>
-      <span key={quantity} className={styles.value} aria-live="polite">
-        {quantity}
-      </span>
-      <button
-        type="button"
-        className={styles.button}
-        onClick={() => update(quantity + 1)}
-        disabled={quantity >= max}
-        aria-label="Увеличить количество"
-      >
-        +
-      </button>
+      <div className={styles.controls}>
+        <button
+          type="button"
+          className={styles.button}
+          onClick={() => update(quantity - 1)}
+          disabled={quantity <= 1}
+          aria-label="Уменьшить количество"
+        >
+          −
+        </button>
+        <span key={quantity} className={styles.value} aria-live="polite">
+          {quantity}
+        </span>
+        <button
+          type="button"
+          className={styles.button}
+          onClick={() => update(quantity + 1)}
+          disabled={quantity >= max}
+          aria-label="Увеличить количество"
+        >
+          +
+        </button>
+      </div>
+      {quantity === max && (
+        <p className={styles.limitMessage} role="status">
+          Максимум {max} штук
+        </p>
+      )}
     </div>
   );
 }

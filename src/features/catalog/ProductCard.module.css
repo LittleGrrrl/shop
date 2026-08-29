@@ -75,6 +75,16 @@
   text-decoration: line-through;
 }
 
+.discountBadge {
+  padding: 3px 6px;
+  border-radius: 4px;
+  background: #d32f2f;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+}
+
 .button {
   width: 100%;
   padding: 10px;
