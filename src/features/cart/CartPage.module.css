@@ -84,17 +84,137 @@
   transform: scale(0.96);
 }
 
+.summary {
+  margin-top: 24px;
+  padding: 16px;
+  border-top: 2px solid #111;
+}
+
+.discount,
 .total {
   display: flex;
   justify-content: space-between;
-  margin-top: 24px;
-  padding: 16px;
+}
+
+.discount {
+  margin-bottom: 8px;
+  color: #2e7d32;
+}
+
+.total {
   font-size: 18px;
-  border-top: 2px solid #111;
 }
 
 .totalPrice {
   font-weight: 700;
+}
+
+.promo {
+  max-width: 480px;
+  margin-top: 24px;
+}
+
+.promoLabel {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.promoControls {
+  display: flex;
+  gap: 8px;
+}
+
+.promoInput {
+  min-width: 0;
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid #c8c8c8;
+  border-radius: 6px;
+  font: inherit;
+  text-transform: uppercase;
+  transition:
+    border-color var(--motion-duration-fast) var(--motion-ease-standard),
+    box-shadow var(--motion-duration-fast) var(--motion-ease-standard);
+}
+
+.promoInput:focus {
+  border-color: #111;
+  box-shadow: 0 0 0 2px rgb(17 17 17 / 12%);
+  outline: none;
+}
+
+.promoInputApplied {
+  border-color: #2e7d32;
+  background: #f1f8f2;
+  color: #1b5e20;
+}
+
+.promoApply,
+.promoRemove {
+  padding: 10px 16px;
+  border: 1px solid #111;
+  border-radius: 6px;
+  font: inherit;
+  cursor: pointer;
+  transition:
+    background var(--motion-duration-fast) var(--motion-ease-standard),
+    color var(--motion-duration-fast) var(--motion-ease-standard),
+    transform var(--motion-duration-fast) var(--motion-ease-standard);
+}
+
+.promoApply {
+  background: #111;
+  color: #fff;
+}
+
+.promoApply:hover:not(:disabled) {
+  background: #333;
+}
+
+.promoApply:disabled {
+  border-color: #ccc;
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.promoRemove {
+  background: #fff;
+  color: #c00;
+  border-color: #c00;
+}
+
+.promoRemove:hover {
+  background: #fff5f5;
+}
+
+.promoApply:active:not(:disabled),
+.promoRemove:active {
+  transform: scale(0.97);
+}
+
+.promoMessage {
+  min-height: 20px;
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+.promoMessage p {
+  margin: 0;
+}
+
+.promoSuccess {
+  color: #2e7d32;
+}
+
+.promoError {
+  color: #c00;
+}
+
+@media (max-width: 480px) {
+  .promoControls {
+    flex-direction: column;
+  }
 }
 
 @keyframes item-enter {
