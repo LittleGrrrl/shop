@@ -37,7 +37,18 @@ function CatalogFilters({ availableCategories, filters, onChange }) {
     }, PRICE_FILTER_DELAY);
 
     return () => window.clearTimeout(timeoutId);
-  }, [minPrice, maxPrice]);
+  }, [minPrice, maxPrice, filters.minPrice, filters.maxPrice]);
+
+  const handlePriceBlur = () => {
+    const hasMinPrice = minPrice !== undefined && minPrice !== null && minPrice !== "";
+    const hasMaxPrice = maxPrice !== undefined && maxPrice !== null && maxPrice !== "";
+
+    if (hasMinPrice && hasMaxPrice && Number(minPrice) > Number(maxPrice)) {
+      setMinPrice(maxPrice);
+      setMaxPrice(minPrice);
+      onChange({ ...filters, minPrice: maxPrice, maxPrice: minPrice });
+    }
+  };
 
   const handleCategoryChange = (category, isChecked) => {
     const categories = isChecked
@@ -60,6 +71,7 @@ function CatalogFilters({ availableCategories, filters, onChange }) {
               min="0"
               value={minPrice}
               onChange={(event) => setMinPrice(event.target.value)}
+              onBlur={handlePriceBlur}
             />
           </label>
           <label className={styles.priceField}>
@@ -70,6 +82,7 @@ function CatalogFilters({ availableCategories, filters, onChange }) {
               min="0"
               value={maxPrice}
               onChange={(event) => setMaxPrice(event.target.value)}
+              onBlur={handlePriceBlur}
             />
           </label>
         </div>

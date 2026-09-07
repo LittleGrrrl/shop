@@ -3,8 +3,13 @@ import { calcDiscountPrice } from "./price.js";
 export function filterProducts(products, { minPrice, maxPrice, categories } = {}) {
   const hasMinPrice = minPrice !== undefined && minPrice !== null && minPrice !== "";
   const hasMaxPrice = maxPrice !== undefined && maxPrice !== null && maxPrice !== "";
-  const normalizedMinPrice = Number(minPrice);
-  const normalizedMaxPrice = Number(maxPrice);
+  let normalizedMinPrice = Number(minPrice);
+  let normalizedMaxPrice = Number(maxPrice);
+
+  if (hasMinPrice && hasMaxPrice && normalizedMinPrice > normalizedMaxPrice) {
+    [normalizedMinPrice, normalizedMaxPrice] = [normalizedMaxPrice, normalizedMinPrice];
+  }
+
   const selectedCategories = new Set(categories ?? []);
 
   return products.filter((product) => {
