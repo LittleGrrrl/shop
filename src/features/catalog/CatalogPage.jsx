@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { products } from "../../data/products.js";
+import { useProducts } from "../../hooks/useProducts.js";
+import CatalogStatus from "./CatalogStatus.jsx";
 import { filterProducts } from "../../utils/filters.js";
 import CatalogFilters from "./CatalogFilters.jsx";
 import ProductCard from "./ProductCard.jsx";
 import styles from "./CatalogPage.module.css";
 
-const AVAILABLE_CATEGORIES = [...new Set(products.map((product) => product.category))];
-
 function CatalogPage() {
+  const { products, status, retry } = useProducts();
+  const availableCategories = [...new Set(products.map((product) => product.category))];
   const [showOnlyInStock, setShowOnlyInStock] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const filters = {
@@ -16,7 +17,7 @@ function CatalogPage() {
     maxPrice: searchParams.get("max_price") ?? "",
     categories: (searchParams.get("categories") ?? "")
       .split(",")
-      .filter((category) => AVAILABLE_CATEGORIES.includes(category)),
+      .filter((category) => availableCategories.includes(category)),
   };
   const filteredProducts = filterProducts(products, filters);
   const visibleProducts = showOnlyInStock
@@ -52,11 +53,39 @@ function CatalogPage() {
     handleFiltersChange({ minPrice: "", maxPrice: "", categories: [] });
   };
 
+  if (status === "loading") {
+    return (
+      <section>
+        <h1 className={styles.title}>Каталог</h1>
+        <CatalogStatus status="loading" />
+      </section>
+    );
+  }
+
+  if (status === "retrying") {
+    return (
+      <section>
+        <h1 className={styles.title}>Каталог</h1>
+        <CatalogStatus status="retrying" />
+      </section>
+    );
+  }
+
+  if (status === "failed") {
+    return (
+      <section>
+        <h1 className={styles.title}>Каталог</h1>
+        <CatalogStatus status="failed" retry={retry} />
+      </section>
+    );
+  }
+
   return (
     <section>
       <h1 className={styles.title}>Каталог</h1>
+      {status === "fallback" && <CatalogStatus status="fallback" retry={retry} />}
       <CatalogFilters
-        availableCategories={AVAILABLE_CATEGORIES}
+        availableCategories={availableCategories}
         filters={filters}
         onChange={handleFiltersChange}
       />

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { products } from "../../data/products.js";
+import { useProducts } from "../../hooks/useProducts.js";
+import CatalogStatus from "./CatalogStatus.jsx";
 import { useCart } from "../cart/CartContext.jsx";
 import { QuantitySelector } from "../../components/QuantitySelector.jsx";
 import { calcDiscountPrice, formatPrice } from "../../utils/price.js";
@@ -8,9 +9,14 @@ import styles from "./ProductPage.module.css";
 
 function ProductPage() {
   const { id } = useParams();
+  const { products, status, retry } = useProducts();
   const product = products.find((p) => p.id === Number(id));
   const { addToCart } = useCart();
   const [quantity, setQuantity] = useState(1);
+
+  if (["loading", "retrying", "failed"].includes(status)) {
+    return <CatalogStatus status={status} retry={retry} />;
+  }
 
   if (!product) {
     return (
@@ -24,6 +30,7 @@ function ProductPage() {
 
   return (
     <section className={styles.product}>
+      <CatalogStatus status={status} retry={retry} />
       <div className={styles.imagePlaceholder} />
       <div className={styles.info}>
         <h1 className={styles.name}>{product.name}</h1>
