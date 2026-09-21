@@ -1,0 +1,84 @@
+.status {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px solid #c8c8c8;
+  border-radius: 8px;
+}
+
+.loading {
+  background: #f6f7f8;
+  border-color: #d8dce1;
+  color: #454b54;
+}
+
+.retrying {
+  background: #eff6ff;
+  border-color: #93b9ef;
+  color: #194a91;
+}
+
+.fallback {
+  background: #fffbeb;
+  border-color: #e8c66a;
+  color: #78500b;
+}
+
+.failed {
+  background: #fff1f2;
+  border-color: #f0a3ac;
+  color: #9b2335;
+}
+
+.indicator {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.title {
+  margin: 0;
+  font-weight: 600;
+  line-height: 28px;
+}
+
+.description {
+  margin: 6px 0 0;
+  line-height: 1.5;
+}
+
+.button {
+  margin-top: 12px;
+  padding: 10px 16px;
+  border: 0;
+  border-radius: 6px;
+  background: #111;
+  color: #fff;
+  font: inherit;
+  cursor: pointer;
+}
+
+.failed .button {
+  background: #9b2335;
+}
+
+.fallback .button {
+  background: #78500b;
+}
+
+.button:hover {
+  filter: brightness(0.9);
+}
+
+.button:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}

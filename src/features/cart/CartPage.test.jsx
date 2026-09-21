@@ -2,19 +2,22 @@ import { fireEvent, render, screen, within } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import App from "../../App.jsx";
 
+afterEach(() => vi.unstubAllEnvs());
+
 describe("CartPage promo discount", () => {
   beforeEach(() => {
     localStorage.clear();
+    vi.stubEnv("VITE_USE_MOCK_DATA", "true");
   });
 
-  it("updates the total and restores it when the promo code is removed", () => {
+  it("updates the total and restores it when the promo code is removed", async () => {
     render(
       <MemoryRouter initialEntries={["/"]}>
         <App />
       </MemoryRouter>,
     );
 
-    fireEvent.click(screen.getAllByRole("button", { name: "В корзину" })[0]);
+    fireEvent.click((await screen.findAllByRole("button", { name: "В корзину" }))[0]);
     fireEvent.click(screen.getByRole("link", { name: /Корзина/ }));
 
     const promoInput = screen.getByLabelText("Промокод");
@@ -40,7 +43,7 @@ describe("CartPage promo discount", () => {
     expect(localStorage.getItem("appliedPromo")).toBeNull();
   });
 
-  it("restores an applied promo code from localStorage", () => {
+  it("restores an applied promo code from localStorage", async () => {
     localStorage.setItem(
       "appliedPromo",
       JSON.stringify({ code: "SALE15", discount: 15 }),
@@ -52,7 +55,7 @@ describe("CartPage promo discount", () => {
       </MemoryRouter>,
     );
 
-    fireEvent.click(screen.getAllByRole("button", { name: "В корзину" })[0]);
+    fireEvent.click((await screen.findAllByRole("button", { name: "В корзину" }))[0]);
     fireEvent.click(screen.getByRole("link", { name: /Корзина/ }));
 
     expect(screen.getByLabelText("Промокод").value).toBe("SALE15");
