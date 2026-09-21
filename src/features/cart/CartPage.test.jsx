@@ -4,8 +4,10 @@ import App from "../../App.jsx";
 
 describe("CartPage promo discount", () => {
   beforeEach(() => {
+    vi.stubEnv("VITE_USE_MOCK_DATA", "true");
     localStorage.clear();
   });
+  afterEach(() => vi.unstubAllEnvs());
 
   it("updates the total and restores it when the promo code is removed", () => {
     render(
