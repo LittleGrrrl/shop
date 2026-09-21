@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { products } from "../../data/products.js";
+import { useProducts } from "../../hooks/useProducts.js";
 import { filterProducts } from "../../utils/filters.js";
 import CatalogFilters from "./CatalogFilters.jsx";
 import ProductCard from "./ProductCard.jsx";
 import styles from "./CatalogPage.module.css";
 
-const AVAILABLE_CATEGORIES = [...new Set(products.map((product) => product.category))];
-
 function CatalogPage() {
+  const { products, status, error, retry } = useProducts();
+  const availableCategories = [...new Set(products.map((product) => product.category))];
   const [showOnlyInStock, setShowOnlyInStock] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const filters = {
@@ -16,7 +16,7 @@ function CatalogPage() {
     maxPrice: searchParams.get("max_price") ?? "",
     categories: (searchParams.get("categories") ?? "")
       .split(",")
-      .filter((category) => AVAILABLE_CATEGORIES.includes(category)),
+      .filter((category) => availableCategories.includes(category)),
   };
   const filteredProducts = filterProducts(products, filters);
   const visibleProducts = showOnlyInStock
@@ -52,11 +52,36 @@ function CatalogPage() {
     handleFiltersChange({ minPrice: "", maxPrice: "", categories: [] });
   };
 
+  if (status === "loading" || status === "retrying" || status === "failed") {
+    return (
+      <section>
+        <h1 className={styles.title}>Каталог</h1>
+        {status === "failed" ? (
+          <div className={styles.notice} role="alert">
+            <p>{error?.message || "Не удалось загрузить каталог."}</p>
+            <button className={styles.resetButton} type="button" onClick={retry}>
+              Повторить загрузку
+            </button>
+          </div>
+        ) : (
+          <p className={styles.notice} role="status">
+            {status === "loading" ? "Загружаем каталог..." : "Повторяем запрос..."}
+          </p>
+        )}
+      </section>
+    );
+  }
+
   return (
     <section>
       <h1 className={styles.title}>Каталог</h1>
+      {status === "fallback" && (
+        <p className={styles.notice} role="status">
+          Показаны данные из кеша — API временно недоступен.
+        </p>
+      )}
       <CatalogFilters
-        availableCategories={AVAILABLE_CATEGORIES}
+        availableCategories={availableCategories}
         filters={filters}
         onChange={handleFiltersChange}
       />

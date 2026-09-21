@@ -11,6 +11,9 @@ function renderApp(path = "/") {
 }
 
 describe("shop", () => {
+  beforeEach(() => vi.stubEnv("VITE_USE_MOCK_DATA", "true"));
+  afterEach(() => vi.unstubAllEnvs());
+
   it("renders catalog with products and add-to-cart", () => {
     renderApp("/");
     expect(screen.getByRole("heading", { name: "Каталог" })).toBeTruthy();

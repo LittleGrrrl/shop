@@ -3,6 +3,14 @@
   margin-bottom: 24px;
 }
 
+.notice {
+  padding: 16px;
+  margin-bottom: 20px;
+  border: 1px solid #c8c8c8;
+  border-radius: 8px;
+  background: #f5f5f5;
+}
+
 .stockFilter {
   display: inline-flex;
   align-items: center;
